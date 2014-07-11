@@ -7,12 +7,12 @@
 ## Installation with Composer
 Composer is the recommended way to utilize the MaxCDN RWS SDK PHP library.  For more information on how to use Composer, see http://www.getcomposer.org .  
 
-1. Add "MaxCDN/rws-sdk-php" as a dependency in your composer.json project file.
+1. Add "maxcdn/php-maxcdn" as a dependency in your composer.json project file.
 
 ```json
 {
     "require": {
-        "MaxCDN/rws-sdk-php": "2.*"
+        "maxcdn/php-maxcdn": "2.*"
     }
 }
 ```
