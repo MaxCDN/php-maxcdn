@@ -1,0 +1,22 @@
+{
+    "name": "maxcdn/php-maxcdn",
+    "description": "PHP Wrapper for MaxCDN Remote Web Services",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "http://docs.maxcdn.com",
+    "support": {
+        "email": "support@maxcdn.com",
+        "source": "http://www.github.com/MaxCDN/php-maxcdn"
+    },
+    "require": { 
+        "php": ">=5.3.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MaxCDN\\": "src/",
+            "": "src/"
+        }
+    }
+
+}
