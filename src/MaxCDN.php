@@ -52,7 +52,7 @@ class MaxCDN {
 		
 		//return the transfer as a string
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , TRUE);
 		
 		// set curl timeout
 		curl_setopt($ch, CURLOPT_TIMEOUT, 60); 
