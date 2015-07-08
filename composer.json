@@ -14,9 +14,14 @@
     },
     "autoload": {
         "psr-0": {
-            "MaxCDN\\": "src/",
-            "": "src/"
-        }
+            "MaxCDN\\": "src/"
+        },
+		"classmap": [
+			"src/MaxCDN.php",
+			"src/MaxCDN/OAuth/OAuthSignatureMethod_PLAINTEXT.php",
+			"src/MaxCDN/OAuth/OAuthSignatureMethod_HMAC_SHA1.php",
+			"src/MaxCDN/OAuth/OAuthSignatureMethod_RSA_SHA1.php"
+		]
     }
 
 }
