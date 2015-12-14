@@ -28,7 +28,7 @@ class MaxCDN {
 
 	private function execute($selected_call, $method_type, $params) {
 		// the endpoint for your request
-		$endpoint = "$this->MaxCDNrws_url/$this->alias$selected_call"; 
+		$endpoint = "{$this->MaxCDNrws_url}/{$this->alias}{$selected_call}"; 
 		
 		//parse endpoint before creating OAuth request
 		$parsed = parse_url($endpoint);
