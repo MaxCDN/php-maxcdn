@@ -5,7 +5,7 @@ class OAuthUtil {
     public static function urlencode_rfc3986($input) {
         if (is_array($input)) {
             return array_map(array('\MaxCDN\OAuth\OAuthUtil', 'urlencode_rfc3986'), $input);
-        } else if (is_scalar($input)) {
+        } elseif (is_scalar($input)) {
             return str_replace(
                                '+',
                                ' ',
@@ -92,7 +92,9 @@ class OAuthUtil {
     // parameters like this
     // array('a' => array('b','c'), 'd' => 'e')
     public static function parse_parameters( $input ) {
-        if (!isset($input) || !$input) return array();
+        if (!isset($input) || !$input) {
+            return array();
+        }
 
         $pairs = explode('&', $input);
 
@@ -121,7 +123,9 @@ class OAuthUtil {
     }
 
     public static function build_http_query($params) {
-        if (!$params) return '';
+        if (!$params) {
+            return '';
+        }
 
         // Urlencode both keys and values
         $keys = OAuthUtil::urlencode_rfc3986(array_keys($params));
