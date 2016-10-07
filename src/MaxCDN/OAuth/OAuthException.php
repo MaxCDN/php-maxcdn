@@ -4,7 +4,7 @@
  */
 namespace MaxCDN\OAuth;
 
-class OAuthException extends Exception {
+class OAuthException extends Exception
+{
     // pass
 }
-

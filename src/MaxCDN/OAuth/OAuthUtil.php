@@ -1,16 +1,18 @@
 <?php
 namespace MaxCDN\OAuth;
 
-class OAuthUtil {
-    public static function urlencode_rfc3986($input) {
+class OAuthUtil
+{
+    public static function urlencode_rfc3986($input)
+    {
         if (is_array($input)) {
             return array_map(array('\MaxCDN\OAuth\OAuthUtil', 'urlencode_rfc3986'), $input);
         } else if (is_scalar($input)) {
             return str_replace(
-                               '+',
-                               ' ',
-                               str_replace('%7E', '~', rawurlencode($input))
-                              );
+                '+',
+                ' ',
+                str_replace('%7E', '~', rawurlencode($input))
+            );
         } else {
             return '';
         }
@@ -20,7 +22,8 @@ class OAuthUtil {
     // This decode function isn't taking into consideration the above
     // modifications to the encoding process. However, this method doesn't
     // seem to be used anywhere so leaving it as is.
-    public static function urldecode_rfc3986($string) {
+    public static function urldecode_rfc3986($string)
+    {
         return urldecode($string);
     }
 
@@ -29,21 +32,23 @@ class OAuthUtil {
     // Can filter out any non-oauth parameters if needed (default behaviour)
     // May 28th, 2010 - method updated to tjerk.meesters for a speed improvement.
     //                  see http://code.google.com/p/oauth/issues/detail?id=163
-    public static function split_header($header, $only_allow_oauth_parameters = true) {
+    public static function split_header($header, $only_allow_oauth_parameters = true)
+    {
         $params = array();
         if (preg_match_all('/('.($only_allow_oauth_parameters ? 'oauth_' : '').'[a-z_-]*)=(:?"([^"]*)"|([^,]*))/', $header, $matches)) {
             foreach ($matches[1] as $i => $h) {
                 $params[$h] = OAuthUtil::urldecode_rfc3986(empty($matches[3][$i]) ? $matches[4][$i] : $matches[3][$i]);
             }
-        if (isset($params['realm'])) {
-            unset($params['realm']);
+            if (isset($params['realm'])) {
+                unset($params['realm']);
+            }
         }
-    }
-    return $params;
+        return $params;
     }
 
     // helper to try to sort out headers for people who aren't running apache
-    public static function get_headers() {
+    public static function get_headers()
+    {
         if (function_exists('apache_request_headers')) {
             // we need this to get the actual Authorization: header
             // because apache tends to tell us it doesn't exist
@@ -56,10 +61,10 @@ class OAuthUtil {
             $out = array();
             foreach ($headers AS $key => $value) {
                 $key = str_replace(
-                                   " ",
-                                   "-",
-                                   ucwords(strtolower(str_replace("-", " ", $key)))
-                                  );
+                    " ",
+                    "-",
+                    ucwords(strtolower(str_replace("-", " ", $key)))
+                );
                 $out[$key] = $value;
             }
         } else {
@@ -77,10 +82,10 @@ class OAuthUtil {
                     // letter of every word that is not an initial HTTP and strip HTTP
                     // code from przemek
                     $key = str_replace(
-                                       " ",
-                                       "-",
-                                       ucwords(strtolower(str_replace("_", " ", substr($key, 5))))
-                                      );
+                        " ",
+                        "-",
+                        ucwords(strtolower(str_replace("_", " ", substr($key, 5))))
+                    );
                     $out[$key] = $value;
                 }
             }
@@ -91,7 +96,8 @@ class OAuthUtil {
     // This function takes a input like a=b&a=c&d=e and returns the parsed
     // parameters like this
     // array('a' => array('b','c'), 'd' => 'e')
-    public static function parse_parameters( $input ) {
+    public static function parse_parameters( $input )
+    {
         if (!isset($input) || !$input) return array();
 
         $pairs = explode('&', $input);
@@ -120,7 +126,8 @@ class OAuthUtil {
         return $parsed_parameters;
     }
 
-    public static function build_http_query($params) {
+    public static function build_http_query($params)
+    {
         if (!$params) return '';
 
         // Urlencode both keys and values
@@ -151,4 +158,3 @@ class OAuthUtil {
         return implode('&', $pairs);
     }
 }
-
