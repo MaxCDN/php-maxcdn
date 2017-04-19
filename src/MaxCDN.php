@@ -46,9 +46,9 @@ class MaxCDN {
 
 		// create curl resource 
 		$ch = curl_init(); 
-		
-		// set url 
-		curl_setopt($ch, CURLOPT_URL, $req_req); 
+		$url_parts = explode('?',$req_req);
+		// set url
+		curl_setopt($ch, CURLOPT_URL, $url_parts[0]);
 		
 		//return the transfer as a string
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -65,8 +65,8 @@ class MaxCDN {
 
 		if ($method_type == "POST" || $method_type == "PUT" || $method_type == "DELETE") {
 		    $query_str = \MaxCDN\OAuth\OAuthUtil::build_http_query($params);
-		    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:', 'Content-Length: ' . strlen($query_str)));
-		    curl_setopt($ch, CURLOPT_POSTFIELDS,  $query_str);
+		    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:', 'Content-Length: ' . strlen($url_parts[1])));
+		    curl_setopt($ch, CURLOPT_POSTFIELDS,  $url_parts[1]);
 		}
 
 		// retrieve headers
