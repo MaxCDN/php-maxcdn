@@ -47,6 +47,9 @@ class MaxCDN {
 		// create curl resource 
 		$ch = curl_init(); 
 		
+		// force curl http/1.1
+		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+		
 		// set url 
 		curl_setopt($ch, CURLOPT_URL, $req_req); 
 		
